@@ -13,7 +13,10 @@
   <body>
 
     <div id="app">
-        <h2>{{ message }}</h2>
+        <h2>{{ nama }}</h2>
+        <h5>{{ ttl }}</h5>
+        <h5>{{ pekerjaan }}</h5>
+        <p>{{ alamat }}</p>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -29,13 +32,6 @@
 
     <!-- CDN VueJs -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: "Hello World"
-            }
-        });
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
