@@ -22,9 +22,9 @@
             </div>
         </nav>
 
-        <div class="d-flex align-items-center">
+        <div class="align-items-center" :class="sliderState">
             <label for="" :class="style.label">Max Price</label>
-            <input type="number" :style="{'width':'60px', 'text-align':'center'}" v-model="maximum">
+            <input type="number" :style="{'width':style.inputSize + 'px', 'text-align':'center'}" v-model="maximum">
             <input type="range" class="form-range" min="0" max="200" v-model="maximum">
         </div>
         <!-- <div class="row my-3">

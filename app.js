@@ -40,12 +40,18 @@ var app = new Vue({
         cart: [],
         style: {
             label: ['font-weight-bold', 'mr-2'],
+            inputSize: 60,
+            slideStatus: true,
         }
 
     },
     methods: {
         addItem: function(data){
             this.cart.push(data);
+        }
+    },computed: {
+        sliderState: function(){
+            return this.style.slideStatus ? 'd-flex' : 'd-none';
         }
     },
     mounted: function(){
