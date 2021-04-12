@@ -14,7 +14,7 @@
 
     <div class="container-fluid mt-3" id="app">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col" v-for="item in products">
+            <div class="col" v-for="item in products" v-if="item.price <= Number(maximum)">
               <div class="card h-100">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="card-body">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="h6" style="float: right
-                    ;">{{ item.price }}</small>
+                    ;">Rp {{ item.price }}</small>
                 </div>
               </div>
             </div>
