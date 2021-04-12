@@ -12,11 +12,22 @@
   </head>
   <body>
 
-    <div id="app">
-        <img :src="image" :alt="nama">
-        <h2>{{ nama }}</h2>
-        <p>{{ description }}</p>
-        <div class="h4">{{ price }}</div>
+    <div class="container-fluid mt-3" id="app">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" v-for="item in products">
+              <div class="card h-100">
+                <img :src="item.image" class="card-img-top" :alt="item.name">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">{{ item.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="h6" style="float: right
+                    ;">{{ item.price }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
