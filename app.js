@@ -85,7 +85,7 @@ Vue.component('product-list',{
                             ;"><price :value="Number(item.price)" :prefix="'Rp '" :precision="2"></price></small>
                         </div>
                         <div class="col-1" style="position: absolute;">
-                            <button v-on:click="addItem(item)" class="btn btn-info" style="color:white; font-size: 24px"><i class="fas fa-cart-plus"></i></button>
+                            <button v-on:click="$emit('add', item)" class="btn btn-info" style="color:white; font-size: 24px"><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </div>
                 </div>
