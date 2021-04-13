@@ -50,19 +50,8 @@ Vue.component('price',{
     template: '<span>{{ this.prefix + Number.parseFloat(this.value).toFixed(this.precision) }}</span>'
 });
 
-var app = new Vue({
-    el: '#app',
-    data: {
-        maximum: 50,
-        products: null,
-        cart: [],
-        style: {
-            label: ['font-weight-bold', 'mr-2'],
-            inputSize: 60,
-            slideStatus: true,
-        }
-
-    },
+Vue.component('product-list',{
+    props: ['products', 'maximum'],
     methods: {
         before: function(el){
             el.className = 'd-none';
@@ -80,6 +69,45 @@ var app = new Vue({
                 el.className = 'col d-flex animate__animated animate__fadeOutRight'
             }, delay);
         },
+    },
+    template: `
+        <div class="row row-cols-1 row-cols-md-3 g-4 d-flex flex-wrap">
+            <transition-group name="fade" tag="div" @beforeEnter="before" @enter="enter" @leave="leave">
+                <div class="col d-none" v-for="(item, index) in products" :key="item.id" v-if="item.price <= Number(maximum)" :data-index="index">
+                    <div class="card h-100">
+                        <img :src="item.image" class="card-img-top" :alt="item.name">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="h4" style="float: right
+                            ;"><price :value="Number(item.price)" :prefix="'Rp '" :precision="2"></price></small>
+                        </div>
+                        <div class="col-1" style="position: absolute;">
+                            <button v-on:click="addItem(item)" class="btn btn-info" style="color:white; font-size: 24px"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </transition-group>
+        </div>
+    `
+});
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        maximum: 50,
+        products: null,
+        cart: [],
+        style: {
+            label: ['font-weight-bold', 'mr-2'],
+            inputSize: 60,
+            slideStatus: true,
+        }
+
+    },
+    methods: {
         addItem: function(data){
             var productIndex;
             var productExist = this.cart.filter(function(item, index){
