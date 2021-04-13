@@ -46,6 +46,22 @@ var app = new Vue({
 
     },
     methods: {
+        before: function(el){
+            el.className = 'd-none';
+        },
+        enter: function(el){
+            var delay = el.dataset.index * 100;
+            setTimeout(function(){
+                el.className = 'col d-flex animate__animated animate__fadeInRight';
+            }, delay);
+
+        },
+        leave: function(el){
+            var delay = el.dataset.index * 100;
+            setTimeout(function(){
+                el.className = 'col d-flex animate__animated animate__fadeOutRight'
+            }, delay);
+        },
         addItem: function(data){
             this.cart.push(data);
         }
