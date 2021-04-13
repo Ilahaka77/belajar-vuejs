@@ -65,7 +65,13 @@ var app = new Vue({
         addItem: function(data){
             this.cart.push(data);
         }
-    },computed: {
+    },
+    filters: {
+        currencyFormat: function(value){
+            return 'Rp '+ Number.parseFloat(value).toFixed(2); 
+        }
+    },
+    computed: {
         sliderState: function(){
             return this.style.slideStatus ? 'd-flex' : 'd-none';
         }
