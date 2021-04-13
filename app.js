@@ -63,7 +63,21 @@ var app = new Vue({
             }, delay);
         },
         addItem: function(data){
-            this.cart.push(data);
+            var productIndex;
+            var productExist = this.cart.filter(function(item, index){
+                if(item.product.id == Number(data.id)){
+                    productIndex = index;
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+
+            if(productExist.length){
+                this.cart[productIndex].qty++;
+            }else{
+                this.cart.push({product: data, qty: 1});
+            }
         }
     },
     filters: {
