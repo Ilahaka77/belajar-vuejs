@@ -22,19 +22,26 @@
                 <button class="btn btn-sm btn-outline-success mr-5" @click="style.slideStatus = !style.slideStatus">
                     <i class="fas fa-dollar-sign"></i>
                 </button>
-                <button class="ml-5 btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <b>Cart:</b>
-                    <span class="badge rounded-pill bg-success">{{ cart.length }}</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownCart">
-                    <div v-for="(item, index) in cart" :key="index">
-                        <span class="badge rounded-pill bg-warning text-dark">
-                            {{ item.qty }}
-                        </span>
-                        {{ item.product.name }}
-                        <b>{{ item.product.price * item.qty }}</b>
+                <transition name="btn-dropdown" enter-active-class="animate__animated animate__zoomIn animate__faster" leave-active-class="animate__animated animate__zoomOut animate__faster">
+                    <div v-if="cart.length > 0">
+                        <button class="ml-5 btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="badge rounded-pill bg-success">{{ cartQty }}</span>
+                            <i class="fas fa-shopping-cart mx-2"></i>
+                            {{ cartTotal | currencyFormat }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownCart">
+                            <div class="mx-2" v-for="(item, index) in cart" :key="index">
+                                <span class="badge rounded-pill bg-warning text-dark">
+                                    {{ item.qty }}
+                                </span>
+                                {{ item.product.name }}
+                                <b>{{ item.product.price * item.qty }}</b>
+                                <a href="#" class="badge bg-danger text-white" @click.stop="deleteItem(index)"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </transition>
+                
             </div>
         </nav>
 

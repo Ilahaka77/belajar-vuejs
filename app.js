@@ -78,6 +78,13 @@ var app = new Vue({
             }else{
                 this.cart.push({product: data, qty: 1});
             }
+        },
+        deleteItem: function(key){
+            if(this.cart[key].qty > 1){
+                this.cart[key].qty--;
+            }else{
+                this.cart.splice(key, 1);
+            }
         }
     },
     filters: {
@@ -88,6 +95,20 @@ var app = new Vue({
     computed: {
         sliderState: function(){
             return this.style.slideStatus ? 'd-flex' : 'd-none';
+        },
+        cartTotal: function(){
+            let sum = 0;
+            for(key in this.cart){
+                sum = sum + (this.cart[key].product.price * this.cart[key].qty);
+            }
+            return sum;
+        },
+        cartQty: function(){
+            let sum = 0;
+            for(key in this.cart){
+                sum = sum + this.cart[key].qty;
+            }
+            return sum;
         }
     },
     mounted: function(){
